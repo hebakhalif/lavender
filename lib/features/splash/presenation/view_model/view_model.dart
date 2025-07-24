@@ -8,7 +8,7 @@ final AppRouter appRouter = AppRouter();
 class SplashTimerViewModel {
   void startTimer(BuildContext context) {
     Timer(const Duration(seconds: 4), () {
-       Navigator.pushReplacementNamed(context, Routes.selectlanguage);
+       Navigator.pushReplacementNamed(context, Routes.selectLanguage);
     }
        );
     }
