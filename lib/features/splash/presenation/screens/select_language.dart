@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/core/themes/spacing.dart';
 import 'package:lavender/core/themes/stylesdart.dart';
 import 'package:lavender/core/widget/custom_botton.dart';
 import 'package:lavender/core/widget/select_lang.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({super.key});
@@ -107,8 +109,11 @@ class _SelectLanguageState extends State<SelectLanguage> {
                     ),
                     Spacer(),
                     CustomBotton(
-                      text: "التالي",
-                       onPressed: (){}
+                      text: AppLocalizations.of(context)!.next,
+
+                       onPressed: (){
+                         Navigator.pushReplacementNamed(context, Routes.homeScreen);
+                       }
                       ),
                   
                   ],

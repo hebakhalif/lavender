@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-extension MediqQueryHelper on BuildContext{
+extension MediaQueryHelper on BuildContext{
   
-  double get screenHeighe => MediaQuery.of(this).size.height;
+  double get screenHeight => MediaQuery.sizeOf(this).height;
 
-   double get screenWidth => MediaQuery.of(this).size.width;
-   double get bottomInset => MediaQuery.of(this).viewInsets.bottom; 
+   double get screenWidth => MediaQuery.sizeOf(this).width;
+   double get bottomInset => MediaQuery.viewInsetsOf(this).bottom;
 
 }  

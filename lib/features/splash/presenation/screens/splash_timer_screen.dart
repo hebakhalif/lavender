@@ -12,7 +12,7 @@ class SplashTimerScreen extends StatefulWidget {
 class _SplashTimerScreenState extends State<SplashTimerScreen> {
   final SplashTimerViewModel viewModel = SplashTimerViewModel();
   
-  // vryy vryy importint
+  // very very important
    @override
   void initState() {
     super.initState();
