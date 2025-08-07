@@ -6,8 +6,9 @@ import 'package:lavender/core/themes/stylesdart.dart';
 class CustomBotton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final bool enabled ;
 
-  const CustomBotton({required this.text, required this.onPressed});
+  const CustomBotton({required this.text, required this.onPressed, this.enabled=true});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,7 +17,8 @@ class CustomBotton extends StatelessWidget {
         height: 48,
         width: 343,
         child: ElevatedButton(
-          onPressed: onPressed,
+
+          onPressed: enabled ? onPressed : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 151, 149, 245),
             shape: RoundedRectangleBorder(

@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lavender/core/routing/app_router.dart';
 import 'package:lavender/lavender.dart';
-void main() {
-  runApp(Lavender(appRouter: AppRouter()));
+
+void main() async {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  await Hive.initFlutter();
+  final box = await Hive.openBox('settings');
+  await Hive.openBox('onboardingBox');
+  final AppRouter appRouter = AppRouter();
+  runApp(
+     EasyLocalization(
+        supportedLocales: [Locale('ar'), Locale('en')],
+        path: 'assets/lang',
+        fallbackLocale: Locale('ar'),
+        startLocale: Locale('ar'),
+        child: Lavender(appRouter: appRouter, box: box),
+      ),
+  );
 }

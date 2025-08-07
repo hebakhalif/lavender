@@ -8,8 +8,10 @@ class AppColors {
   static const Color primaryColorLavenderLangAndText = Color(0XFF7270E4);
   static const Color w = Color(0XFFFFFFFF);
   // (colors all app)
-
+  static const Color grey100 = Color(0xFFF5EFFB);
+  static const Color grey200 = Color(0xFFD6D7EC);
   static const Color purple50 =  Color(0xFFF2F2FF);
+  static const Color purpleappbar =  Color(0xFFEDEEFF);
   static const Color purple100 = Color(0xFFD7D6FD);
   static const Color purple200 = Color(0xFFC3C2FD);
   static const Color purple300 = Color(0xFFA8A7FC);
