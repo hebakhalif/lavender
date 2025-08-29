@@ -114,12 +114,12 @@ class _SelectLanguageState extends State<SelectLanguage> {
                     ],
                   ),
                   Spacer(),
-                  CustomBotton(
+                  CustomButton(
                     text: "next".tr(),
                     onPressed: () {
                       Navigator.pushReplacementNamed(
                         context,
-                        Routes.onbpordingScreen,
+                        Routes.onboardingScreen,
                       );
                      /* context.read<OnbordingCubit>().completeOnboarding();
                       Navigator.pushReplacementNamed(

@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class AppColors {
   //(Primary Colors)
@@ -29,6 +29,28 @@ class AppColors {
   static const Color orang2    = Color(0XFFFF7442);
   static const Color read      = Color(0xFFFC5555);
   static const Color yellow    = Color(0xFFFFC258);
+  static const Color lightYellow = Color(0xFFE8EA9D);
+  static const Color pinkShade   = Color(0xFFEFB7D3);
+  static const Color purpleShade = Color(0xFF8381F6);
   static const Color grey      = Color(0xFF767884);
   static const Color grey2     = Color(0xFFD9D9D9);
+  static const Color grey3     = Color(0xFFFAFAFC);
+  static const Color grey4     = Color(0xFFD9D9D9);
+
+  static const Color doctorCardColor     = Color(0xFFFAFAFC);
+  static const Color inactiveBorderColor     = Color(0xFFF0F4FC);
+  static const Color inActiveDateColor = Color(0xFF8A96BC);
+  static const Color shadePurpleColor = Color(0xFFDCDCF9);
+
+
+  static const LinearGradient linearGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      pinkShade,
+      purpleShade,
+    ],
+    stops: [0.0, 1.0],
+  );
+
 }

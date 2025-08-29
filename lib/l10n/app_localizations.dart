@@ -100,6 +100,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next'**
   String get next;
+
+  /// No description provided for @start_your_journey.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your journey'**
+  String get start_your_journey;
+
+  /// No description provided for @the_best_specialists.
+  ///
+  /// In en, this message translates to:
+  /// **'The best specialists'**
+  String get the_best_specialists;
+
+  /// No description provided for @view_all.
+  ///
+  /// In en, this message translates to:
+  /// **'View all'**
+  String get view_all;
+
+  /// No description provided for @earliest_appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Earliest appointment'**
+  String get earliest_appointment;
+
+  /// No description provided for @stories_recovery.
+  ///
+  /// In en, this message translates to:
+  /// **'stories recovery'**
+  String get stories_recovery;
+
+  /// No description provided for @attendance.
+  ///
+  /// In en, this message translates to:
+  /// **'attendance'**
+  String get attendance;
+
+  /// No description provided for @years_experience.
+  ///
+  /// In en, this message translates to:
+  /// **'years experience'**
+  String get years_experience;
+
+  /// No description provided for @book_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Book now'**
+  String get book_now;
+
+  /// No description provided for @hourly_rate.
+  ///
+  /// In en, this message translates to:
+  /// **'hourly rate'**
+  String get hourly_rate;
+
+  /// No description provided for @intro_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Join and engage with a like-minded community and meet top experts'**
+  String get intro_message;
+
+  /// No description provided for @select_lang.
+  ///
+  /// In en, this message translates to:
+  /// **'Select your preferred language'**
+  String get select_lang;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @title_onboarding1.
+  ///
+  /// In en, this message translates to:
+  /// **'At Lavender, we diagnose the problem with certified specialists'**
+  String get title_onboarding1;
+
+  /// No description provided for @subtitle_onboarding1.
+  ///
+  /// In en, this message translates to:
+  /// **'Certified'**
+  String get subtitle_onboarding1;
+
+  /// No description provided for @title_onboarding2.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal and completely confidential consultations to improve your life'**
+  String get title_onboarding2;
+
+  /// No description provided for @subtitle_onboarding2.
+  ///
+  /// In en, this message translates to:
+  /// **'In general'**
+  String get subtitle_onboarding2;
+
+  /// No description provided for @title_onboarding3.
+  ///
+  /// In en, this message translates to:
+  /// **'Your peace of mind is just a click away'**
+  String get title_onboarding3;
+
+  /// No description provided for @subtitle_onboarding3.
+  ///
+  /// In en, this message translates to:
+  /// **'Start now'**
+  String get subtitle_onboarding3;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @enter.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter'**
+  String get enter;
+
+  /// No description provided for @no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t have an account?'**
+  String get no_account;
+
+  /// No description provided for @create_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get create_account;
+
+  /// No description provided for @have_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get have_account;
+
+  /// No description provided for @sign_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get sign_in;
+
+  /// No description provided for @first_name.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get first_name;
+
+  /// No description provided for @last_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get last_name;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get or;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

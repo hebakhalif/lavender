@@ -1,4 +1,28 @@
 {
   "@@locale": "ar",
-  "next": "التالي"
+  "next": "التالي",
+  "start_your_journey" : "ابدأ رحلتك",
+  "the_best_specialists" : "افضل الاخصائيين",
+  "view_all" : "عرض الكل",
+  "title_onboarding1":"في لافندر هيتم تشخيص \nالمشكلة مع متخصصين",
+  "subtitle_onboarding1": "معتمدين",
+  "title_onboarding2": "استشارات شخصية و\n سرية تمامًا لتحسين حياتك",
+  "subtitle_onboarding2": "بشكل عام",
+  "title_onboarding3": "راحة بالك في متناول يديك\n فقط بضغطة زر",
+  "subtitle_onboarding3": "ابداء الان",
+  "skip": "تخطى",
+    "intro_message": "ادخل و شارك مع مجتمع مثلك وقابل\nافضل المتخصصين",
+    "back": "الرجوع",
+    "login": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "enter": "دخول",
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "no_account": "ليس لديك حساب ؟",
+    "create_account": "إنشاء حساب",
+    "have_account": "لديك حساب بالفعل؟",
+    "sign_in": "تسجيل الدخول",
+    "or": "أو"
+
+
 }

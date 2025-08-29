@@ -4,10 +4,13 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:lavender/core/routing/app_router.dart';
 import 'package:lavender/lavender.dart';
 
+import 'core/networking/dio_helper.dart';
+
 void main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  DioHelper.init();
   await Hive.initFlutter();
   final box = await Hive.openBox('settings');
   await Hive.openBox('onboardingBox');

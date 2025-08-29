@@ -107,7 +107,7 @@ class SelectLanguageView extends StatelessWidget {
 
                     AppSpaces.vSpace40,
 
-                    CustomBotton(
+                    CustomButton(
                       text: AppLocalizations.of(context)?.next ?? "Next",
                       onPressed: () {
                         Navigator.pushReplacementNamed(
