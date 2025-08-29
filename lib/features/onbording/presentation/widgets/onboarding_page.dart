@@ -43,8 +43,8 @@ class OnboardingPage extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
               //  final box = Hive.box('appBox');
-                //box.put('onboardingCompleted', true);
-               Navigator.pushReplacementNamed(context, Routes.homeScreen);
+               // box.put('onboardingCompleted', true);
+             Navigator.pushReplacementNamed(context, Routes.loginOrSignupScreen);
               },
               child: Text(
                 "skip".tr(),

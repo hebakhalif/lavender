@@ -144,7 +144,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       );
     } else {
       context.read<OnbordingCubit>().completeOnboarding();
-      Navigator.pushReplacementNamed(context, Routes.homeScreen); // Navigate to home
+      Navigator.pushReplacementNamed(context, Routes.loginOrSignupScreen); // Navigate to home
     }
   }
 

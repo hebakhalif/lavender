@@ -115,6 +115,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   ),
                   Spacer(),
                   CustomBotton(
+                    textColor: AppColors.w,
                     text: "next".tr(),
                     onPressed: () {
                       Navigator.pushReplacementNamed(

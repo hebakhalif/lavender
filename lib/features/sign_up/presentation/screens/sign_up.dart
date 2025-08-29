@@ -1,0 +1,269 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lavender/core/helpers/show_floating_message.dart';
+import 'package:lavender/core/routing/router.dart';
+import 'package:lavender/core/themes/app_colors.dart';
+import 'package:lavender/core/widget/custom_botton.dart';
+import 'package:lavender/core/widget/validators.dart';
+import 'package:lavender/features/sign_up/presentation/cubit/sign_up_cubit.dart';
+import 'package:lavender/features/sign_up/presentation/widgets/social_circle_button.dart';
+import 'package:lavender/features/sign_up/presentation/widgets/text_fild.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+          child: SingleChildScrollView(
+            child: Transform.scale(
+              scale: 0.95,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      "الرجوع",
+                      style: TextStyle(
+                        color: AppColors.purple600.withOpacity(0.8),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Center(
+                    child: Text(
+                      "إنشاء حساب",
+                      style: TextStyle(
+                        color: AppColors.primaryColorDarkText,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+
+                  BlocConsumer<SignUpCubit, SignUpState>(
+                    listener: (context, state) {
+                      if (state is SignUpSuccess) {
+                        showFloatingMessage(
+                          context,
+                          "تم التسجيل بنجاح 🎉",
+                          background: AppColors.green1,
+                          seconds: 2,
+                        );
+
+                        Future.delayed(const Duration(milliseconds: 600), () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.questionScreen,
+                          );
+                        });
+                      } else if (state is SignUpError) {
+                        showFloatingMessage(
+                          context,
+                          state.message,
+                          background: Colors.red,
+                          seconds: 2,
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      final cubit = context.read<SignUpCubit>();
+                      if (state is SignUpLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // الاسم
+                            Text(
+                              "الاسم بالكامل",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            CustomTextField(
+                              hint: "الاسم بالكامل",
+                              controller: nameController,
+                              keyboardType: TextInputType.name,
+                              validator:
+                                  (value) =>
+                                      Validators.required(value, "الاسم مطلوب"),
+                            ),
+                            SizedBox(height: 16.h),
+
+                            Text(
+                              "البريد الإلكتروني",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            CustomTextField(
+                              hint: "البريد الإلكتروني",
+                              controller: cubit.emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              validator:
+                                  (value) =>
+                                      Validators.required(
+                                        value,
+                                        "الإيميل مطلوب",
+                                      ) ??
+                                      Validators.email(value),
+                            ),
+                            SizedBox(height: 16.h),
+
+                            Text(
+                              "كلمة المرور",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            CustomTextField(
+                              hint: "كلمة المرور",
+                              controller: cubit.passwordController,
+                              keyboardType: TextInputType.visiblePassword,
+                              isPassword: true,
+                              validator:
+                                  (value) =>
+                                      Validators.required(
+                                        value,
+                                        "كلمة المرور مطلوبة",
+                                      ) ??
+                                      Validators.minLength(
+                                        value,
+                                        8,
+                                        "على الأقل 8 حروف",
+                                      ),
+                            ),
+                            SizedBox(height: 30.h),
+
+                            CustomBotton(
+                              text: "دخول",
+                              textColor: AppColors.w,
+                              onPressed: () {
+                                debugPrint("SignUp button pressed");
+
+                                if (!formKey.currentState!.validate()) {
+                                  debugPrint("Form is not valid");
+                                  return;
+                                }
+
+                                final fullName = nameController.text.trim();
+                                final email = cubit.emailController.text.trim();
+                                final password =
+                                    cubit.passwordController.text.trim();
+
+                                final parts = fullName.split(" ");
+                                final firstName =
+                                    parts.isNotEmpty ? parts[0] : "";
+                                final lastName =
+                                    parts.length > 1
+                                        ? parts.sublist(1).join(" ")
+                                        : "*";
+
+                                debugPrint(
+                                  "Calling cubit.signUp with: $firstName ,$lastName ,$email",
+                                );
+
+                                context.read<SignUpCubit>().signUp(
+                                  first_name: firstName,
+                                  last_name: lastName,
+                                  email: email,
+                                  password: password,
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 20.h),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("لديك حساب بالفعل؟"),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.signInScreen,
+                                    );
+                                  },
+                                  child: const Text("تسجيل الدخول"),
+                                ),
+                              ],
+                            ),
+
+                            const Divider(
+                              height: 1,
+                              indent: 50,
+                              endIndent: 50,
+                              color: AppColors.grey100,
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SocialCircleButton(
+                                  imagePath: 'assets/svg/icons_Facebook.svg',
+                                  onTap: () {},
+                                ),
+                                SocialCircleButton(
+                                  imagePath:
+                                      'assets/svg/icons.social_apple.svg',
+                                  onTap: () {},
+                                ),
+                                SocialCircleButton(
+                                  imagePath:
+                                      'assets/svg/icons.social_google.svg',
+                                  onTap: () {},
+                                ),
+                                SocialCircleButton(
+                                  imagePath: 'assets/svg/Group (2).svg',
+                                  onTap: () {},
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
