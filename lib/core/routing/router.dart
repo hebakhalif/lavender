@@ -1,5 +1,6 @@
 class Routes {
-    static const String splashTimerScreen = '/splash';
-    static const String selectLanguage = '/select-language';
-    static const String homeScreen = '/home';
+  static const String splashTimerScreen = '/SplashTimerScreen';
+  static const String selectlanguage = '/SelectLanguage';
+  static const String homeScreen = '/homeScreen';
+  static const String onbpordingScreen = '/OnbpordingScreen';
 }
