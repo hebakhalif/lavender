@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/features/Questions/screens/question_screen.dart';
+import 'package:lavender/features/home/presenation/all_doctors_screen.dart';
 import 'package:lavender/features/home/presenation/home_screen.dart';
+import 'package:lavender/features/home/presenation/specialists_screen.dart';
 import 'package:lavender/features/onbording/presentation/screens/onbpording_screen.dart';
 import 'package:lavender/features/sign_in/presentation/screens/sign_in.dart';
 import 'package:lavender/features/sign_up/presentation/screens/login_or_signup_Screen.dart';
@@ -32,7 +34,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => SignUpScreen());
       case Routes.questionScreen:
         return MaterialPageRoute(builder: (_) => QuestionScreen());
-
+      case Routes.specialistScreen:
+        return MaterialPageRoute(builder: (_) => SpecialistsScreen());
+        case Routes.allDoctorsScreen:
+        return MaterialPageRoute(builder: (_) => AllDoctorsScreen());
       default:
         return MaterialPageRoute(
           builder:

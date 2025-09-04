@@ -8,5 +8,7 @@ class Routes {
   static const String signInScreen = '/signInScreen';
   static const String signUpScreen = '/signUpScreen';
   static const String questionScreen = '/question-screen';
+  static const String specialistScreen = '/specialist-screen';
+  static const String allDoctorsScreen ='/AllDoctorsScreen';
 
 }

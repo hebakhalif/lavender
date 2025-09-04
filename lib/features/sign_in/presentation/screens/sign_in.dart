@@ -8,7 +8,7 @@ import 'package:lavender/core/widget/custom_botton.dart';
 import 'package:lavender/features/sign_in/presentation/cubit/sign_in_cubit.dart';
 import 'package:lavender/features/sign_in/presentation/cubit/sign_in_state.dart';
 import 'package:lavender/features/sign_up/presentation/widgets/social_circle_button.dart';
-import 'package:lavender/features/sign_up/presentation/widgets/text_fild.dart';
+import 'package:lavender/features/sign_up/presentation/widgets/custom_text_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -35,10 +35,9 @@ class _SignInScreenState extends State<SignInScreen> {
               child: BlocConsumer<SignInCubit, SigninState>(
                   listener: (context, state) {
                     if (state is SigninSuccess) {
-                      final user = state.user;
+                     // final user = state.user;
 
                       // await CacheHelper.saveData(key: 'accessToken', value: user.accessToken);
-
                       showFloatingMessage(
                         context,
                         "تم تسجيل الدخول بنجاح 🎉",
@@ -47,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       );
 
                       Future.delayed(const Duration(milliseconds: 600), () {
-                        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+                        Navigator.pushReplacementNamed(context, Routes.questionScreen);
                       });
                     }
                   },
@@ -103,6 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             isPassword: true,
                           ),
                           SizedBox(height: 30.h),
+                          
                           CustomButton(
                             text: "دخول",
                             onPressed: () {

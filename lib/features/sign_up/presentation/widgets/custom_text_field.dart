@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lavender/core/themes/app_colors.dart';
-import 'package:lavender/core/themes/stylesdart.dart';
+import 'package:lavender/core/themes/styles.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hint;
@@ -38,13 +38,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
         Text(
           widget.title,
           style: GoogleFonts.alexandria(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: 10.h),
         TextFormField(
-          style: TextStyles.bodyBold,
+          style: TextStyles.bodyMedium,
           controller: widget.controller,
           keyboardType: widget.keyboardType,
           obscureText: widget.isPassword ? obscureText : false,

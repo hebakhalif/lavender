@@ -5,7 +5,7 @@ import 'package:lavender/core/cubits/select_language_cubit.dart';
 import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/core/themes/spacing.dart';
-import 'package:lavender/core/themes/stylesdart.dart';
+import 'package:lavender/core/themes/styles.dart';
 import 'package:lavender/core/widget/custom_botton.dart';
 import 'package:lavender/core/widget/select_lang.dart';
 import '../../../../l10n/app_localizations.dart';

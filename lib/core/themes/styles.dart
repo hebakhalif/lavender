@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lavender/core/themes/app_colors.dart';
 
 class TextStyles {
   // H1 (40sp)
@@ -92,11 +93,13 @@ class TextStyles {
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
     height: 1.5,
+    color: AppColors.doctorCardColor,
   );
   static final TextStyle h6Medium = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.w500,
     height: 1.5,
+    
   );
   static final TextStyle h6Regular = TextStyle(
     fontSize: 20.sp,
@@ -114,6 +117,7 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeight.w500,
     height: 1.5,
+    color: AppColors.doctorCardColor,
   );
   static final TextStyle bodyRegular = TextStyle(
     fontSize: 16.sp,

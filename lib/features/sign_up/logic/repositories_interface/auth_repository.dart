@@ -11,6 +11,7 @@ abstract class AuthRepository {
 
   Future<void> signOut();
   Future<UserEntity?> getCurrentUser();
+  
   Future<UserModel> signIn({
     required String email,
     required String password,

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/core/themes/padding.dart';
-import 'package:lavender/core/themes/stylesdart.dart';
+import 'package:lavender/core/themes/styles.dart';
 
 class SelectLang extends StatelessWidget {
   final String image;

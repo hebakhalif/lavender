@@ -1,24 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:lavender/core/networking/api_constants.dart';
+import 'package:lavender/core/networking/auth_helper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DioHelper {
   // Singleton instance
-  static Dio? _dio;
+  static Dio? dio;
 
   // Base URL
   static const String baseUrl = ApiConstants.baseUrl;
 
   // Initialize Dio
   static void init() {
-    _dio = Dio(
+    dio = Dio(
 
       BaseOptions(
       baseUrl: ApiConstants.baseUrl,
       receiveDataWhenStatusError: true,
-      connectTimeout: const Duration(seconds: 20),
-      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
       sendTimeout: const Duration(seconds: 10),
       headers: {'Content-Type': 'application/json'},
     ),
@@ -26,7 +26,7 @@ class DioHelper {
     );
 
     // Add interceptors
-    addInterceptors(_dio!);
+    addInterceptors(dio!);
   }
 
   // Add interceptors
@@ -34,14 +34,13 @@ class DioHelper {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // Authorization
-          final prefs = await SharedPreferences.getInstance();
-          final token = prefs.getString('userToken');
-          if (token != null && token.isNotEmpty) {
-            options.headers['Authorization'] = 'Bearer $token';
+          final token = AuthHelper.access;
+          if(token != null && token.isNotEmpty){
+            options.headers["Auhorization"]= "Bearer $token";
           }
-          return handler.next(options);
+          return handler.next(options);     
         },
+        onError: (error, handler) async=> handler.next(error),
       ),
     );
 
@@ -64,7 +63,7 @@ class DioHelper {
     Map<String, dynamic>? query,
     Map<String, dynamic>? headers,
   }) async {
-    return await _dio!.get(
+    return await dio!.get(
       url,
       queryParameters: query,
       options: Options(headers: headers),
@@ -78,7 +77,7 @@ class DioHelper {
     Map<String, dynamic>? query,
     Map<String, dynamic>? headers,
   }) async {
-    return await _dio!.post(
+    return await dio!.post(
       url,
       data: data,
       queryParameters: query,
@@ -93,7 +92,7 @@ class DioHelper {
     Map<String, dynamic>? query,
     Map<String, dynamic>? headers,
   }) async {
-    return await _dio!.put(
+    return await dio!.put(
       url,
       data: data,
       queryParameters: query,

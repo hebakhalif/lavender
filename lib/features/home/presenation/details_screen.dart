@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lavender/core/themes/app_colors.dart';
-import 'package:lavender/core/themes/stylesdart.dart';
-import 'package:lavender/features/home/widgets/day_chip.dart';
 import 'package:lavender/features/home/widgets/info_card.dart';
-import 'package:lavender/features/home/widgets/time_slot.dart';
 import 'package:lavender/features/home/widgets/time_slot_selector.dart';
 
 import '../widgets/day_selector.dart';
@@ -24,7 +21,7 @@ class PsychologistDetailsPage extends StatelessWidget {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "assets/psychologist.jpg",
+                "assets/images/image 262.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -93,7 +90,6 @@ class PsychologistDetailsPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 24),
-
                       DaySelector (),
                       const SizedBox(height: 24),
 

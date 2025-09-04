@@ -8,7 +8,7 @@ import 'package:lavender/core/widget/custom_botton.dart';
 import 'package:lavender/core/widget/validators.dart';
 import 'package:lavender/features/sign_up/presentation/cubit/sign_up_cubit.dart';
 import 'package:lavender/features/sign_up/presentation/widgets/social_circle_button.dart';
-import 'package:lavender/features/sign_up/presentation/widgets/text_fild.dart';
+import 'package:lavender/features/sign_up/presentation/widgets/custom_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -51,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 5.h),
                   Center(
                     child: Text(
                       "إنشاء حساب",
@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 30.h),
 
                   BlocConsumer<SignUpCubit, SignUpState>(
                     listener: (context, state) {
@@ -77,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Future.delayed(const Duration(milliseconds: 600), () {
                           Navigator.pushReplacementNamed(
                             context,
-                            Routes.signInScreen,
+                            Routes.questionScreen,
                           );
                         });
                       } else if (state is SignUpError) {
@@ -106,27 +106,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               children: [
                                 Expanded(
                                   child: CustomTextField(
-                                    hint: "First Name",
-                                    title: 'First Name',
+                                    hint: "الاسم الاول",
+                                    title: 'الاسم الاول',
                                     controller: cubit.firstNameController,
                                     keyboardType: TextInputType.name,
                                     validator:
-                                        (value) =>
-                                            Validators.required(value, "الاسم مطلوب"),
+                                        (value) => Validators.required(
+                                          value,
+                                          "الاسم مطلوب",
+                                        ),
                                   ),
-                                ),Expanded(
+                                ),
+                                Expanded(
                                   child: CustomTextField(
-                                    hint: "Last Name",
-                                    title: 'Last Name',
+                                    hint: "الاسم الاخير",
+                                    title: 'الاسم الاخير',
                                     controller: cubit.lastNameController,
                                     keyboardType: TextInputType.name,
                                     validator:
-                                        (value) =>
-                                            Validators.required(value, "الاسم مطلوب"),
+                                        (value) => Validators.required(
+                                          value,
+                                          "الاسم مطلوب",
+                                        ),
                                   ),
                                 ),
                               ],
                             ),
+                            SizedBox(height: 1.h),
+                            
                             CustomTextField(
                               title: 'البريد الإلكتروني',
                               hint: "البريد الإلكتروني",
@@ -140,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ) ??
                                       Validators.email(value),
                             ),
-                            SizedBox(height: 16.h),
+
                             CustomTextField(
                               hint: "كلمة المرور",
                               title: "كلمة المرور",
@@ -159,7 +166,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         "على الأقل 8 حروف",
                                       ),
                             ),
-                            SizedBox(height: 14.h),
 
                             CustomButton(
                               text: "دخول",
@@ -172,8 +178,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   return;
                                 }
 
-                                final firstName = cubit.firstNameController.text.trim();
-                                final lastName = cubit.lastNameController.text.trim();
+                                final firstName =
+                                    cubit.firstNameController.text.trim();
+                                final lastName =
+                                    cubit.lastNameController.text.trim();
                                 final email = cubit.emailController.text.trim();
                                 final password =
                                     cubit.passwordController.text.trim();
@@ -187,7 +195,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               },
                             ),
 
-                            SizedBox(height: 4.h),
 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
