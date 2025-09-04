@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lavender/core/networking/api_constants.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/core/themes/stylesdart.dart';
+import 'package:lavender/features/home/data/models/specialist.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key, this.onTap});
+  const DoctorCard({super.key, this.onTap, required this.specialist});
   final void Function()? onTap;
+  final Specialist specialist;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.all(12.r),
+        // margin: EdgeInsets.all(12.r),
         padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
           color: AppColors.doctorCardColor,
@@ -30,13 +33,15 @@ class DoctorCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: Image.asset(
-                    "assets/images/logo_app.png",
-                    width: 70.w,
-                    height: 70.w,
-                    fit: BoxFit.cover,
+                Container(
+                  height: 70.w,
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: DecorationImage(
+                      image: NetworkImage("${ApiConstants.imagePath}${specialist.profilePic}"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(width: 12.w),
@@ -49,7 +54,7 @@ class DoctorCard extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Dr. Ashraqat Khaled",
+                              "${specialist.user.firstName} ${specialist.user.lastName}",
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
@@ -70,7 +75,7 @@ class DoctorCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "7 years experience",
+                            "${specialist.yearsOfExperience} years experience",
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: Colors.grey,
@@ -78,7 +83,7 @@ class DoctorCard extends StatelessWidget {
                           ),
                           SizedBox(width: 8.w),
                           Text(
-                            "4.9",
+                            "${specialist.avgRating}",
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
@@ -162,7 +167,7 @@ class DoctorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "200 L.E",
+                      "${specialist.pricePerHour} L.E",
                       style: TextStyles.smallRegular.copyWith(
                         color: AppColors.primaryColorLavenderLangAndText,
                         height: 1.2,

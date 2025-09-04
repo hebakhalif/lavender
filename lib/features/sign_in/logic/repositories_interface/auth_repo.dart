@@ -1,4 +1,4 @@
-// import 'package:lavender/features/sign_in/data/models/user_model.dart';
+// import 'package:lavender/features/sign_in/data/models/specialists_response.dart';
 // import 'package:lavender/features/sign_up/logic/entities/user_entity.dart';
 //
 // abstract class AuthRepository {

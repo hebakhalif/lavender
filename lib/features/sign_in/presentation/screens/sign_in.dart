@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lavender/core/helpers/secure_storage_helper.dart';
 import 'package:lavender/core/helpers/show_floating_message.dart';
 import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/core/themes/app_colors.dart';
@@ -33,11 +34,9 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Form(
               key: formKey,
               child: BlocConsumer<SignInCubit, SigninState>(
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is SigninSuccess) {
                       final user = state.user;
-
-                      // await CacheHelper.saveData(key: 'accessToken', value: user.accessToken);
 
                       showFloatingMessage(
                         context,
@@ -46,9 +45,26 @@ class _SignInScreenState extends State<SignInScreen> {
                         seconds: 2,
                       );
 
-                      Future.delayed(const Duration(milliseconds: 600), () {
+                        // await SecureStorageHelper.saveTokens(
+                        //   user.accessToken,
+                        //   user.refreshToken,
+                        // );
+
+                        showFloatingMessage(
+                          context,
+                          "تم تسجيل الدخول بنجاح 🎉",
+                          background: AppColors.green1,
+                          seconds: 2,
+                        );
+
                         Navigator.pushReplacementNamed(context, Routes.homeScreen);
-                      });
+                    } else if (state is SigninError) {
+                      showFloatingMessage(
+                        context,
+                        state.message,
+                        background: Colors.red,
+                        seconds: 2,
+                      );
                     }
                   },
                   builder: (context, state) {

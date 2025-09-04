@@ -6,28 +6,34 @@ import 'day_chip.dart';
 class DaySelector extends StatelessWidget {
   const DaySelector({super.key});
 
-  final List<String> days = const ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس"];
-  final List<String> dates = const ["7", "8", "9", "10", "11"];
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DayCubit, int>(
-      builder: (context, selectedIndex) {
+    return BlocBuilder<DayCubit, DateTime>(
+      builder: (context, selectedDate) {
+        final weekData = context.read<DayCubit>().getCurrentWeekDaysAndDates();
+        final days = weekData["days"]!;
+        final dates = weekData["dates"]!;
+
         return SizedBox(
           height: 68,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: days.length,
             shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             separatorBuilder: (_, __) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
+              // التاريخ الفعلي
+              final date = DateTime.now().add(Duration(days: index));
+
               return DayChip(
                 day: days[index],
                 date: dates[index],
-                selected: selectedIndex == index,
+                selected: date.day == selectedDate.day &&
+                    date.month == selectedDate.month &&
+                    date.year == selectedDate.year,
                 onTap: () {
-                  context.read<DayCubit>().selectDay(index);
+                  context.read<DayCubit>().selectDay(date);
                 },
               );
             },
@@ -35,5 +41,7 @@ class DaySelector extends StatelessWidget {
         );
       },
     );
+
   }
+
 }

@@ -1,32 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lavender/core/cubits/slot_cubit.dart';
+import 'package:lavender/core/helpers/format_helper.dart';
 import 'package:lavender/core/themes/app_colors.dart';
+import '../data/models/appointment.dart';
 import 'time_slot.dart';
 
 class TimeSlotSelector extends StatelessWidget {
-  const TimeSlotSelector({super.key});
+  const TimeSlotSelector({
+    super.key,
+    required this.appointments,
+    required this.selectedDate,
+  });
 
-  final List<String> slots = const [
-    "10:30ص - 11:30ص",
-    "11:30ص - 12:30ص",
-    "2:30م - 3:30م",
-    "3:30م - 4:30م",
-    "12:30م - 1:30م",
-    "4:30م - 5:30م",
-  ];
+  final List<Appointment> appointments;
+  final DateTime selectedDate;
 
   @override
   Widget build(BuildContext context) {
+    // فلترة المواعيد بناءً على اليوم المختار
+    final filteredSlots = appointments.where((slot) {
+      DateTime date = DateTime.parse(slot.date);
+      return date.year == selectedDate.year &&
+          date.month == selectedDate.month &&
+          date.day == selectedDate.day;
+    }).toList();
+
     return BlocBuilder<SlotCubit, int?>(
       builder: (context, selectedIndex) {
+        if (filteredSlots.isEmpty) {
+          return const Center(child: Text("لا توجد مواعيد متاحة لهذا اليوم"));
+        }
+
         return Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: List.generate(slots.length, (index) {
+          children: List.generate(filteredSlots.length, (index) {
+            final slots = filteredSlots[index];
             return TimeSlot(
-              label: slots[index],
-              booked: index == 3 ? true : false,
+              label: "${FormatHelper.formatTime(slots.startTime)} - ${FormatHelper.formatTime(slots.endTime)}",
+              booked: slots.isBooked,
               selected: selectedIndex == index,
               onTap: () {
                 context.read<SlotCubit>().selectSlot(index);

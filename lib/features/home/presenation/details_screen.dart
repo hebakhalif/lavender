@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lavender/core/helpers/format_helper.dart';
+import 'package:lavender/core/networking/api_constants.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/core/themes/stylesdart.dart';
+import 'package:lavender/features/home/data/models/specialist.dart';
 import 'package:lavender/features/home/widgets/day_chip.dart';
 import 'package:lavender/features/home/widgets/info_card.dart';
 import 'package:lavender/features/home/widgets/time_slot.dart';
 import 'package:lavender/features/home/widgets/time_slot_selector.dart';
 
+import '../../../core/cubits/day_cubit.dart';
 import '../widgets/day_selector.dart';
 
 class PsychologistDetailsPage extends StatelessWidget {
-  const PsychologistDetailsPage({super.key});
-
+  const PsychologistDetailsPage({super.key, required this.specialist});
+  final Specialist specialist;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 280,
+            expandedHeight: 446,
             floating: false,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/psychologist.jpg",
+              background: Image.network(
+                "${ApiConstants.imagePath}${specialist.profilePic}",
                 fit: BoxFit.cover,
               ),
             ),
@@ -45,7 +50,7 @@ class PsychologistDetailsPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("أنا ليبان محمد",
+                          Text("أنا ${specialist.user.firstName}${specialist.user.lastName}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
@@ -54,7 +59,7 @@ class PsychologistDetailsPage extends StatelessWidget {
                             children: [
                               const Icon(Icons.star, color: Colors.amber),
                               const SizedBox(width: 4),
-                              Text("4.5",
+                              Text("${specialist.avgRating}",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey[700])),
@@ -75,10 +80,7 @@ class PsychologistDetailsPage extends StatelessWidget {
 
                       /// Description
                       Text(
-                        "أخصائية نفسية متخصصة في دراسة وتحليل سلوك الأفراد "
-                            "ووظائف الدماغ من أجل فهم العوامل النفسية التي تؤثر "
-                            "على حياتهم. تقوم بتقديم الدعم والاستشارات النفسية "
-                            "لمساعدة في تحسين الصحة النفسية للمرضى.",
+                        specialist.bio,
                         style: TextStyle(color: Colors.grey[800], height: 1.5),
                       ),
                       const SizedBox(height: 16),
@@ -86,10 +88,10 @@ class PsychologistDetailsPage extends StatelessWidget {
                       /// Info stats
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          InfoCard(title: "7 سنين", subtitle: "خبرة", icon: 'medal-star.png',),
+                        children: [
+                          InfoCard(title: "${specialist.yearsOfExperience} سنين", subtitle: "خبرة", icon: 'medal-star.png',),
                           InfoCard(title: "50+", subtitle: "المعالجون", icon: 'emoji-normal.png',),
-                          InfoCard(title: "200 جنيه", subtitle: "سعر الساعة", icon: 'moneys.png',),
+                          InfoCard(title: "${FormatHelper.removeExtraDots(specialist.pricePerHour)} جنيه", subtitle: "سعر الساعة", icon: 'moneys.png',),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -101,7 +103,15 @@ class PsychologistDetailsPage extends StatelessWidget {
                       Text("الجدول 🗓️",
                           style: Theme.of(context).textTheme.titleMedium),
                       const SizedBox(height: 12),
-                      TimeSlotSelector(),
+                      BlocBuilder<DayCubit, DateTime>(
+                        builder: (context, selectedDate) {
+
+                          return TimeSlotSelector(
+                            appointments: specialist.appointments,
+                            selectedDate: selectedDate,
+                          );
+                        },
+                      ),
                       const SizedBox(height: 32),
 
                       /// Button
