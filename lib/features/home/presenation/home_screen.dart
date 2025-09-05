@@ -5,9 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lavender/core/networking/api_constants.dart';
 import 'package:lavender/core/themes/app_colors.dart';
 import 'package:lavender/features/home/presenation/cubit/home_cubit.dart';
 import 'package:lavender/features/home/presenation/cubit/home_state.dart';
+import 'package:lavender/features/home/presenation/cubit/quote_cubit.dart';
+import 'package:lavender/features/home/presenation/cubit/quote_state.dart';
 import 'package:lavender/features/home/widgets/specialists_card.dart';
 import '../../../core/routing/router.dart';
 import '../widgets/doctor_card.dart';
@@ -96,26 +99,24 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   color: Colors.transparent,
 
-                  child: Container(
-                    child: CupertinoSearchTextField(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.doctorCardColor),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      placeholder: "ابحث عن استشاري..".tr(),
-                      placeholderStyle: TextStyle(
-                        color: AppColors.grey4,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.search_outlined,
-                        size: 25,
-                        color: AppColors.doctorCardColor,
-                      ),
-                      //   suffixIcon: Icon(Icons.search_outlined,
-                      // size: 25,
-                      //  color: AppColors.doctorCardColor,
-                      //   )
+                  child: CupertinoSearchTextField(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.doctorCardColor),
+                      borderRadius: BorderRadius.circular(20),
                     ),
+                    placeholder: "ابحث عن استشاري..".tr(),
+                    placeholderStyle: TextStyle(
+                      color: AppColors.grey4,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search_outlined,
+                      size: 25,
+                      color: AppColors.doctorCardColor,
+                    ),
+                    //   suffixIcon: Icon(Icons.search_outlined,
+                    // size: 25,
+                    //  color: AppColors.doctorCardColor,
+                    //   )
                   ),
                 ),
               ),
@@ -285,34 +286,101 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.primaryColorLavenderLangAndText
                               )),
-                              Container(
-                                width: double.infinity,
-                                height: 142.h,
-                                // margin: EdgeInsets.symmetric(vertical: 12.h),
-                                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                                decoration: BoxDecoration(
-                                  // color: AppColors.primaryColorLavenderLangAndText,
-                                  image: DecorationImage(image: AssetImage("assets/images/Frame 1597882141 (1)")),
-                                  borderRadius: BorderRadius.circular(36.w)
+                            Stack(
+                              alignment: Alignment.center,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: 190.h,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(image: AssetImage("assets/images/Frame 1597882141 (1).png"), fit: BoxFit.cover),
+                                  ),
                                 ),
-                                // child: Column(
-                                //   spacing: 12.h,
-                                //   children: [
-                                //     Text("النفس أضعف ما تكون قاهرةً، وأقوى ما تكون مقهورة.", style: GoogleFonts.alexandria(
-                                //         fontSize: 12.sp,
-                                //         fontWeight: FontWeight.w500,
-                                //         color: Colors.white
-                                //     )),
-                                //
-                                //     Text("د.هند البنا", style: GoogleFonts.alexandria(
-                                //         fontSize: 12.sp,
-                                //         fontWeight: FontWeight.w500,
-                                //         color: Colors.white
-                                //     )),
-                                //
-                                //   ],
-                                // ),
-                              )
+                                Positioned(
+                                  top: 8,
+                                  child: Container(
+                                    width: 55.w,
+                                    height: 55.w,
+                                    padding: EdgeInsets.all(5.sp),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                      shape: BoxShape.circle
+                                    ),
+                                    child: BlocBuilder<QuoteCubit, QuoteState>(
+                                      builder: (context, state) {
+                                        if (state is QuotesLoading) {
+                                          return const Center(child: CircularProgressIndicator());
+                                        } else if (state is QuotesLoaded) {
+                                          final quote = state.quote.quote;
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(image: NetworkImage("${ApiConstants.imagePath}${quote.image}"), fit: BoxFit.cover),
+                                                shape: BoxShape.circle
+                                            ),
+
+                                          );
+                                        } else if (state is QuotesError) {
+                                          return Center(
+                                            child: Text(
+                                              state.message,
+                                              style: const TextStyle(color: Colors.red),
+                                            ),
+                                          );
+                                        }
+                                        return const SizedBox.shrink();
+                                      },
+                                    )
+                                  ),
+                                ),
+                                BlocBuilder<QuoteCubit, QuoteState>(
+                                  builder: (context, state) {
+                                    if (state is QuotesLoading) {
+                                      return const Center(child: CircularProgressIndicator());
+                                    } else if (state is QuotesLoaded) {
+                                      final quote = state.quote.quote;
+                                      return Align(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                                              child: Text(
+                                                quote.text,
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.alexandria(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              quote.author,
+                                              style: GoogleFonts.alexandria(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else if (state is QuotesError) {
+                                      return Center(
+                                        child: Text(
+                                          state.message,
+                                          style: const TextStyle(color: Colors.red),
+                                        ),
+                                      );
+                                    }
+                                    return const SizedBox.shrink();
+                                  },
+                                )
+
+                              ],
+                            ),
 
 
                             ],

@@ -45,10 +45,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         seconds: 2,
                       );
 
-                        // await SecureStorageHelper.saveTokens(
-                        //   user.accessToken,
-                        //   user.refreshToken,
-                        // );
+                        await SecureStorageHelper.saveTokens(
+                          user.accessToken,
+                          user.refreshToken,
+                        );
 
                         showFloatingMessage(
                           context,

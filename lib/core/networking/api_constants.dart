@@ -5,4 +5,5 @@ class ApiConstants {
   static const String signUp = "api/v1/user/register";
   static const String signIn = "api/v1/user/login";
   static const String getSpecialists = "api/v1/specialists/";
+  static const String getQuotes = "api/v1/quote/daily/";
 }

@@ -7,6 +7,7 @@ import 'package:lavender/core/routing/app_router.dart';
 import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/features/home/data/repositories/home_repo_impl.dart';
 import 'package:lavender/features/home/presenation/cubit/home_cubit.dart';
+import 'package:lavender/features/home/presenation/cubit/quote_cubit.dart';
 import 'package:lavender/features/onbording/presentation/cubit/onbording_cubit.dart';
 import 'package:lavender/features/sign_in/logic/use_cases/sign_in_usecase.dart';
 import 'package:lavender/features/sign_in/presentation/cubit/sign_in_cubit.dart';
@@ -40,7 +41,8 @@ class Lavender extends StatelessWidget {
         BlocProvider(create: (_) => DayCubit(),),
         BlocProvider(create: (_) => SignInCubit(SignInUseCase(AuthRepositoryImpl())),),
         BlocProvider(create: (_) => SignUpCubit(SignUpUseCase(AuthRepositoryImpl(),),),),
-        BlocProvider(create: (_) => HomeCubit(HomeRepositoryImpl())..fetchSpecialists(),),
+        BlocProvider(create: (_) => HomeCubit(HomeRepositoryImpl())..fetchSpecialists()),
+        BlocProvider(create: (_) => QuoteCubit(HomeRepositoryImpl())..fetchQuotes(),),
         ],
           child: MaterialApp(
            locale: context.locale,
