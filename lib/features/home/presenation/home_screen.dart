@@ -53,16 +53,16 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // CircleAvatar(
-                    //   radius: 25,
-                    //   backgroundColor: const Color.fromARGB(142, 190, 151, 196),
-                    //   child: CircleAvatar(
-                    //     radius: 20,
-                    //     backgroundImage: AssetImage(
-                    //       "assets/images/Ellipse 1188.png",
-                    //     ),
-                    //   ),
-                    // ),
+                    CircleAvatar(
+                      radius: 15,
+                      backgroundColor: const Color.fromARGB(142, 190, 151, 196),
+                      child: CircleAvatar(
+                        radius: 20,
+                        backgroundImage: AssetImage(
+                          "assets/images/Ellipse 1188.png",
+                        ),
+                      ),
+                    ),
 
                     SizedBox(width: 10),
                     Column(
@@ -195,6 +195,7 @@ class HomeScreen extends StatelessWidget {
                             Navigator.pushNamed(context, Routes.specialistScreen);
                           },
                         ),
+
 
                         Wrap(
                           spacing: 12.w,

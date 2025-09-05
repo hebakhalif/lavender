@@ -3,6 +3,7 @@ import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/features/Questions/screens/question_screen.dart';
 import 'package:lavender/features/home/presenation/all_doctors_screen.dart';
 import 'package:lavender/features/home/presenation/home_screen.dart';
+import 'package:lavender/features/home/presenation/main_view.dart';
 import 'package:lavender/features/home/presenation/specialists_screen.dart';
 import 'package:lavender/features/onbording/presentation/screens/onbpording_screen.dart';
 import 'package:lavender/features/sign_in/presentation/screens/sign_in.dart';
@@ -22,7 +23,7 @@ class AppRouter {
       case Routes.selectLanguage:
         return MaterialPageRoute(builder: (_) => SelectLanguage());
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => MainView());
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case Routes.psychologistDetailsPage:

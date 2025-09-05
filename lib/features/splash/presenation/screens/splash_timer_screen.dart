@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lavender/core/helpers/secure_storage_helper.dart';
+import 'package:lavender/core/routing/router.dart';
 import 'package:lavender/features/splash/presenation/view_model/view_model.dart';
 
 class SplashTimerScreen extends StatefulWidget {
@@ -10,13 +12,10 @@ class SplashTimerScreen extends StatefulWidget {
 }
 
 class _SplashTimerScreenState extends State<SplashTimerScreen> {
-  final SplashTimerViewModel viewModel = SplashTimerViewModel();
-  
-  // very very important
-   @override
+  @override
   void initState() {
     super.initState();
-    viewModel.startTimer(context);
+    _checkAuth();
   }
 
   @override
@@ -45,5 +44,19 @@ class _SplashTimerScreenState extends State<SplashTimerScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _checkAuth() async {
+    final accessToken = await SecureStorageHelper.getAccessToken();
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    if (!mounted) return;
+
+    if (accessToken != null && accessToken.isNotEmpty) {
+      Navigator.pushReplacementNamed(context, Routes.homeScreen);
+    } else {
+      Navigator.pushReplacementNamed(context, Routes.loginOrSignupScreen);
+    }
   }
 }
